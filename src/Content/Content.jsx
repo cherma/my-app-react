@@ -1,26 +1,13 @@
 import React from 'react';
 import InputArea from '../InputArea';
-import Banner from '../Banner';
 
-class Content extends React.Component {
+const Content = () => {
 
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-  }
-
-  updateValue = (newValue) => {
-    this.setState({ value: newValue})
-  }
-
-  render() {
     return(
       <React.Fragment>
-      <InputArea onDataChange={(newValue) => this.updateValue(newValue)} />
-      <Banner text={this.state.value} />
+      <InputArea />
       </React.Fragment>
     )
-  }
 };
 
 export default Content;

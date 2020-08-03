@@ -1,16 +1,27 @@
 import React from 'react';
 
-const InputArea = ({ onDataChange }) => {
+class InputArea extends React.Component {
 
-  const changeHandler = (event) => {
-    onDataChange(event.target.value);
+  constructor(props){
+    super(props);
+    this.state = {value: ''};
   }
 
+  changeHandler(event) {
+    this.setState({ value: event.target.value },()=>{
+      console.log('Callback', this.state.value);
+    });
+    console.log('Next to setState', this.state.value);
+  }
+
+  render() {
+    console.log('Inside Render', this.state.value);
     return (
       <div className="input-area">
-        <input onChange={(event) => changeHandler(event)} />
+        <input onChange={(event) => this.changeHandler(event)} />
       </div>
     )
+  }
 
 }
 

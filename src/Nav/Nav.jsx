@@ -9,7 +9,7 @@ const Nav = () => {
       {
         navItem.map((item) => {
           return (
-            <NavItem data={item} />
+            <NavItem key={item} data={item} />
           )
         })
       }
