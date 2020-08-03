@@ -1,0 +1,9 @@
+.nav {
+  display: flex;
+  background: black;
+  color: white;
+}
+
+.nav * {
+  flex: 1;
+}
