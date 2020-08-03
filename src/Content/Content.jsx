@@ -6,7 +6,27 @@ class Content extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: '', loading: true };
+  }
+
+  componentWillMount() {
+    console.log('Mounting Initiated');
+  }
+
+  componentDidMount() {
+    console.log('Mounting done');
+    setTimeout(()=>this.setState({ loading: false }), 2000);
+  }
+
+  componentDidUpdate() {
+    console.log('updation done');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('should update',nextProps, nextState);
+    if(nextState.value === '12')
+      return false;
+    return true;
   }
 
   updateValue = (newValue) => {
@@ -16,8 +36,13 @@ class Content extends React.Component {
   render() {
     return(
       <React.Fragment>
-      <InputArea onDataChange={(newValue) => this.updateValue(newValue)} />
-      <Banner text={this.state.value} />
+        {this.state.loading ?
+        'Loading...' :
+        <React.Fragment>  
+          <InputArea onDataChange={(newValue) => this.updateValue(newValue)} />
+          <Banner text={this.state.value} /> 
+        </React.Fragment>
+    }
       </React.Fragment>
     )
   }
