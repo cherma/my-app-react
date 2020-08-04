@@ -1,4 +1,4 @@
-Array => .map()
+Array => .map(), .filter(), .forEach()
 
 const x = [1,2,3];
 x.map((currentData, currentIndex) => console.log(currentData, currentIndex));
