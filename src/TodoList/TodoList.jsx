@@ -7,17 +7,20 @@ class TodoList extends React.Component {
     this.state = {todos: []};
   }
 
-  componentDidMount() {
-    console.log('Make api')
-    //Using Promise
-    //Pyramid of promise
-    fetch('https://jsonplaceholder.typicode.com/todos')
-    .then(response => response.json())
-    .then(data => {
-      this.setState({todos: data})
-    });
-    console.log(this.state.todos);
-    console.log('API done');
+  componentDidMount = async () => { //Parent function needs to be have async keyword it you have await in it
+    //using await
+    const makeApi = async () => { //Since its another seperate function making api, we need async
+      console.log('Make API initiated');
+
+      //await to finish api and return data
+      const todos = await fetch('https://jsonplaceholder.typicode.com/todos').then(response => response.json());
+      console.log('API Done', todos);
+      return todos;
+    };
+
+    const todos = await makeApi(); //await used to make actions sync, 
+                                  //remove await n you'll see error saying todo is not iteratable
+    this.setState({ todos: [...todos]});
   }
 
   render() {
