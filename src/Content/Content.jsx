@@ -10,20 +10,16 @@ class Content extends React.Component {
   }
 
   componentWillMount() {
-    console.log('Mounting Initiated');
   }
 
   componentDidMount() {
-    console.log('Mounting done');
     setTimeout(()=>this.setState({ loading: false }), 2000);
   }
 
   componentDidUpdate() {
-    console.log('updation done');
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('should update',nextProps, nextState);
     if(nextState.value === '12')
       return false;
     return true;
