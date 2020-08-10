@@ -4,7 +4,7 @@ class TodoList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {todos: []};
+    this.state = {posts: []};
   }
 
   componentDidMount() {
@@ -14,17 +14,28 @@ class TodoList extends React.Component {
     fetch('https://jsonplaceholder.typicode.com/todos')
     .then(response => response.json())
     .then(data => {
-      this.setState({todos: data})
+      //Geting user id of first todo
+      const firstUserId = data[0].userId;
+
+      //Making api to get posts of first user id
+      fetch('https://jsonplaceholder.typicode.com/posts?userId='+firstUserId)
+      .then(response => response.json())
+      .then(data => this.setState({posts: data}))
+
+      // You can also write
+      // `https://jsonplaceholder.typicode.com/posts?userId=${firstUserId}` -> ${firstUserId} -> string interpolation
     });
-    console.log(this.state.todos);
+    console.log(this.state.posts);
     console.log('API done');
   }
 
   render() {
     return (
       <div className="list">
-        {this.state.todos.length === 0 && <div> Loading todos....</div> }
-        { this.state.todos.map(todo => <div key={todo.id} className="todo-item">{todo.title}</div> )}
+        {this.state.posts.length === 0 && <div> Loading posts....</div> }
+        { this.state.posts.map(todo => <div key={todo.id} className="post-data">
+          <div>{todo.title}</div>
+        </div> )}
       </div>
     )
   }
